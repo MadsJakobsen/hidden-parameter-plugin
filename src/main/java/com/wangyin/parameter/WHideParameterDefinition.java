@@ -6,13 +6,14 @@ package com.wangyin.parameter;
 import hudson.Extension;
 import hudson.model.ParameterDefinition;
 import hudson.model.ParameterValue;
+import org.jenkinsci.Symbol;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 
 /**
  * @author wy-scm <wy-scm@jd.com>
- * 
+ *
  */
 public class WHideParameterDefinition extends ParameterDefinition {
 
@@ -26,14 +27,14 @@ public class WHideParameterDefinition extends ParameterDefinition {
 	public void setDefaultValue(String defaultValue) {
 		this.defaultValue = defaultValue;
 	}
- 
+
     @DataBoundConstructor
 	public WHideParameterDefinition(String name,String defaultValue, String description) {
 		super(name, description);
 		this.defaultValue = defaultValue;
 	}
- 
-    @Extension
+
+    @Extension @Symbol({"hidden","hiddenParam"})
 	public static class DescriptorImpl extends ParameterDescriptor {
         @Override
         public String getDisplayName() {
@@ -57,7 +58,7 @@ public class WHideParameterDefinition extends ParameterDefinition {
             throw new IllegalArgumentException("Illegal number of parameter values for " + getName() + ": " + value.length);
         } else {
             return new WHideParameterValue(getName(), value[0], getDescription());
-        } 
+        }
 	}
 
 
@@ -70,7 +71,7 @@ public class WHideParameterDefinition extends ParameterDefinition {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) { 
+	public static void main(String[] args) {
 
 	}
 
